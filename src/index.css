@@ -8,12 +8,9 @@ body {
   align-items: center;
   justify-content: center;
   background-color: #232332;
-}
-.welcome{
-  text-align: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-/* CSS */
 .start__btn {
   align-items: center;
   appearance: none;
@@ -25,7 +22,6 @@ body {
   color: #36395A;
   cursor: pointer;
   display: inline-flex;
-  font-family: "JetBrains Mono",monospace;
   height: 48px;
   justify-content: center;
   line-height: 1;
@@ -59,46 +55,68 @@ body {
   transform: translateY(2px);
 }
 
-.quizz{
-  background-color: white;
-  
-  width: 60vw;
-  padding: 30px;
-  border-radius: 20px;
+/* Add this CSS to your existing styles or create a new CSS file */
 
-}
-.quizz h1{
-  text-align: center;
-}
-
-.quizz .question{
-  font-weight: bold;
-  font-size: 1.3rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid rgb(243, 242, 242);
-}
-
-.quizz ul{
-  list-style-type: none;
-}
-.quizz li{
-  background-color: rgb(246, 255, 164);
+.quizz {
+  max-width: 600px; /* Adjust the maximum width based on your design */
+  margin: auto;
   padding: 20px;
-  margin: 20px 0;
-  margin-left: -40px;
-  border-radius: 20px;
+  box-sizing: border-box;
 }
-.quizz li:hover{
-  background-color: rgb(255, 174, 0);
-  transition: all 0.5s ease;
-  font-weight: 500;
+
+.welcome, div:not(.welcome) {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.start__btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+h1, h2, p {
+  margin: 10px 0;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.allQuizz {
+  font-size: 14px;
+}
+
+.question {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+li {
+  background-color: #ddd;
+  padding: 10px;
+  margin: 5px 0;
   cursor: pointer;
 }
-.allQuizz{
-  font-size: 1.2rem;
-  font-weight: 500;
+
+.selected {
+  background-color: #4caf50;
+  color: white;
 }
-li.selected {
-  background-color: rgb(255, 174, 0); /* Set the background color for the selected option */
-  color: #fff; /* Set the text color for better visibility */
+
+@media (max-width: 600px) {
+  .quizz {
+    padding: 10px;
+  }
+
+  .start__btn {
+    font-size: 14px;
+  }
+
+  li {
+    font-size: 14px;
+  }
 }
