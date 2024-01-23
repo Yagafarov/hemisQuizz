@@ -39,6 +39,7 @@ body {
   white-space: nowrap;
   will-change: box-shadow,transform;
   font-size: 18px;
+  margin: 20px;
 }
 
 .start__btn:focus {
@@ -105,6 +106,10 @@ li {
 .selected {
   background-color: #4caf50;
   color: white;
+}
+
+.correct{
+  background-color: blue;
 }
 
 @media (max-width: 600px) {

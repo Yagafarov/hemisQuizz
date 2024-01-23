@@ -13,9 +13,6 @@ function belgilanganSoniBoyiChaElementlarniTanlash(jsonMassiv, soni) {
   return tanlanganElementlar;
 }
 
-// 50 elementdan 5 ta tanlangan
-// var quizData = belgilanganSoniBoyiChaElementlarniTanlash(quizData1, 5);
-
 function shuffleArray(array) {
   // Function to shuffle an array using Fisher-Yates algorithm
   for (let i = array.length - 1; i > 0; i--) {
@@ -32,7 +29,8 @@ function App() {
   const [shuffledOptions, setShuffledOptions] = useState([]);
   const [quizData, setDataSize] = useState(quizData1);
   const [quizStarted, setQuizStarted] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(null); // New state
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [showCorrectAnswer, setShowCorrectAnswer] = useState(false);
 
   useEffect(() => {
     // Shuffle options whenever the current question changes
@@ -41,6 +39,9 @@ function App() {
 
   const handleAnswerClick = (option) => {
     setSelectedOption(option); // Set the selected option
+
+    // Check if the selected option is correct and update the state
+    setShowCorrectAnswer(option === quizData[currentQuestion].answer);
   };
 
   const handleNextQuestion = () => {
@@ -55,10 +56,11 @@ function App() {
       if (currentQuestion + 1 < quizData.length) {
         setCurrentQuestion(currentQuestion + 1);
         setSelectedOption(null); // Reset selected option for the next question
+        setShowCorrectAnswer(false); // Reset the correct answer display
         // Shuffle options for the next question
-        setShuffledOptions(
-          shuffleArray(quizData[currentQuestion + 1].options)
-        );
+        // setShuffledOptions(
+        //   shuffleArray(quizData[currentQuestion + 1].options)
+        // );
       } else {
         setShowResult(true);
       }
@@ -85,7 +87,8 @@ function App() {
           <h1>Test trinajoriga xush kelibsiz!</h1>
           <button className='start__btn' onClick={handleStartQuiz}>
             Testni boshlash
-          </button>
+          </button><br/>
+          <a href="https://anodra.uz" target={'_blank'} className="start__btn">Biz haqimizda</a>
         </div>
       ) : !showResult ? (
         <div>
@@ -101,7 +104,12 @@ function App() {
                 key={index}
                 onClick={() => handleAnswerClick(option)}
                 className={
-                  option === selectedOption ? 'selected' : ''
+                  option === selectedOption
+                    ? 'selected'
+                    : option === quizData[currentQuestion].answer &&
+                      showCorrectAnswer
+                    ? 'correct'
+                    : ''
                 }
               >
                 {option}
@@ -111,13 +119,22 @@ function App() {
 
           <p>To'g'ri savollar soni: {score}</p>
 
+          {/* "To'g'ri javob" button */}
+          <button
+            className='start__btn'
+            onClick={() => setShowCorrectAnswer(true)}
+            disabled={showCorrectAnswer || selectedOption === null}
+          >
+            To'g'ri javob
+          </button>
           <button
             className='start__btn'
             onClick={handleNextQuestion}
-            disabled={selectedOption === null} // Disable the button if no option is selected
+            disabled={selectedOption === null}
           >
             Keyingisi
           </button>
+
         </div>
       ) : (
         <div className='welcome'>
